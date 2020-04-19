@@ -18,8 +18,8 @@ class LinearRegression():
         self.weights = None
         self.bias = 1
 
-    def _loss(self):
-        pass
+    def _loss(self, m, hypothesis, y):
+        return (1 / (2*m)) * sum(np.square(hypothesis - y))
 
     def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
         X = X[:,np.newaxis]

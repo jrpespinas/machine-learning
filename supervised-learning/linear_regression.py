@@ -14,7 +14,7 @@ def hypothesis(X,theta):
     return X @ theta
 
 def cost_function(X,y,theta):
-    pass
+      return sum(np.square((y - hypothesis(X,theta))))/X.shape[0]
 
 def gradient_descent():
     pass
@@ -25,6 +25,8 @@ def main():
     features = dataset.data
     y = dataset.target[:,np.newaxis] 
 
+    # This feature was particularly chosen as the variable for univariate
+    # linear regression after visualizing the dataset in a separate notebook.
     RM = features[:,5] 
 
     # Create matrix of features

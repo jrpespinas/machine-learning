@@ -14,10 +14,15 @@ def hypothesis(X,theta):
     return X @ theta
 
 def cost_function(X,y,theta):
-      return sum(np.square((y - hypothesis(X,theta))))/X.shape[0]
+    return sum(np.square((y - hypothesis(X,theta))))/X.shape[0]
 
-def gradient_descent():
-    pass
+def gradient_descent(X,y,theta,alpha,iterations):
+    for i in range(iterations):
+        predictions = hypothesis(X,theta)
+        theta = theta - (alpha/len(X))*(-X.T.dot(y-predictions))
+
+    if i % 50 == 0:
+        print(f'Error in {i}th iteration: {cost_function(X,y,theta)}')
 
 def main():
     # DATASET

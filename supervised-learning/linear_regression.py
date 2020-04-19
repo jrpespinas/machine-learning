@@ -4,63 +4,22 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__: '1.0.0'
+__version__: '2.0.0'
 __author__: 'Jan Rodolf Espinas'
 
 import numpy as np
 from sklearn.datasets import load_boston
 
-def hypothesis(X,theta):
-    return X @ theta
+class LinearRegression():
 
-def cost_function(X,y,theta):
-    return sum(np.square((y - hypothesis(X,theta))))/X.shape[0]
+    def __init__():
+        pass
 
-def gradient_descent(X,y,theta,alpha,iterations):
-    for i in range(iterations):
-        predictions = hypothesis(X,theta)
-        theta = theta - (alpha/len(X))*(-X.T.dot(y-predictions))
-
-    if i % 50 == 0:
-        print(f'Error in {i}th iteration: {cost_function(X,y,theta)}')
-
-def gradient_descent_from_scratch(X,y,theta,alpha,iterations):
-    for i in range(iterations):    
-        predict_0 = 0
-        predict_1 = 1
-        for j in range(len(X)):
-            predict_0 += (-2)*(y[j] - (theta[0] + (theta[1]*X[j][1])))
-            predict_1 += (-2*X[j][1])*(y[j] - (theta[0] + (theta[1]*X[j][1])))
-        temp_0 = theta[0] - alpha * 1/len(X) * predict_0
-        temp_1 = theta[1] - alpha * 1/len(X) * predict_1
-
-        theta[0] = temp_0
-        theta[1] = temp_1
-    
-    if i % 100 == 0:
-        print(f'Error in {i}th iteration: {cost_function(X,y,theta)}')
-        print(theta[0],theta[1])
+    def fit():
+        pass
 
 def main():
-    # DATASET
-    dataset = load_boston()
-    features = dataset.data
-    y = dataset.target[:,np.newaxis] 
-
-    # This feature was particularly chosen as the variable for univariate
-    # linear regression after visualizing the dataset in a separate notebook.
-    RM = features[:,5] 
-
-    # Create matrix of features
-    X = np.ones((RM.shape[0],2))
-    X[:,1:] = RM[:,np.newaxis]
-
-    # Create matrix of theta
-    theta = np.random.randn(2)
-    theta = theta[:,np.newaxis]
-
-    print(X)
-    print(theta)
+    pass
 
 if __name__ == '__main__':
     main()

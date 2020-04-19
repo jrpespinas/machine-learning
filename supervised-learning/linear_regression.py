@@ -25,12 +25,25 @@ class LinearRegression():
         X = X[:,np.newaxis]
         m, features = X.shape
         
-        # initialize weights
+        # Initialize weights
         self.weights = np.random.randn(features,1)
 
-        # hypothesis function
-        hypothesis = self.bias + (X @ self.weights)
-        
+        # Gradient Descent
+        for i in range(epochs):
+
+            # Hypothesis Function
+            hypothesis = self.bias + (X @ self.weights)
+
+            # Partial Derivatives of the Cost Function
+            pd_b = (1/m) * sum(hypothesis-y)
+            pd_w = (1/m) * np.dot(X.T, (hypothesis-y))
+
+            # Assigning theta
+            self.bias -=  alpha*pd_b
+            self.weights -= alpha*pd_w
+
+            # Get loss
+            loss = self._loss(m, hypothesis, y)
 
     def predict(self, X):
         pass
@@ -42,7 +55,7 @@ def main():
     RM = features[:,5] 
 
     model = LinearRegression()
-    model.fit(RM,y)
+    model.fit(RM, y, epochs=1, verbosity=1)
 
 if __name__ == '__main__':
     main()

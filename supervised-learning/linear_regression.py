@@ -24,6 +24,23 @@ def gradient_descent(X,y,theta,alpha,iterations):
     if i % 50 == 0:
         print(f'Error in {i}th iteration: {cost_function(X,y,theta)}')
 
+def gradient_descent_from_scratch(X,y,theta,alpha,iterations):
+    for i in range(iterations):    
+        predict_0 = 0
+        predict_1 = 1
+        for j in range(len(X)):
+            predict_0 += (-2)*(y[j] - (theta[0] + (theta[1]*X[j][1])))
+            predict_1 += (-2*X[j][1])*(y[j] - (theta[0] + (theta[1]*X[j][1])))
+        temp_0 = theta[0] - alpha * 1/len(X) * predict_0
+        temp_1 = theta[1] - alpha * 1/len(X) * predict_1
+
+        theta[0] = temp_0
+        theta[1] = temp_1
+    
+    if i % 100 == 0:
+        print(f'Error in {i}th iteration: {cost_function(X,y,theta)}')
+        print(theta[0],theta[1])
+
 def main():
     # DATASET
     dataset = load_boston()

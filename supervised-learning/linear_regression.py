@@ -45,8 +45,12 @@ class LinearRegression():
             # Get loss
             loss = self._loss(m, hypothesis, y)
 
+            # display loss and weights
+            if verbosity:
+                print(f'Epoch: {i}, Weights: {self.bias[0]}, Loss: {loss}')
+
     def predict(self, X):
-        pass
+        return self.bias + (X @ self.weights)
 
 def main():
     dataset = load_boston()

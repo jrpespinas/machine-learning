@@ -18,7 +18,23 @@ class LinearRegression():
         self.theta = None
 
     def loss(self, X, y):
-        pass
+        '''
+        This function calculates the performance of the model
+
+        Parameters
+        ----------
+        X : numpy.ndarray
+            2-dimensional matrix containing the inputs
+        y : numpy.ndarray
+            Nx1 matrix containing the actual values
+
+        Returns
+        -------
+        float 
+            The loss value
+        '''
+        return (1 / (2*m)) * sum(np.square(predict(X)-y))
+        
 
     def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
         pass
@@ -31,7 +47,7 @@ class LinearRegression():
         Parameters
         ----------
         X : numpy.ndarray
-            Matrix containing the inputs
+            M x N matrix containing the inputs
         
         Returns
         -------

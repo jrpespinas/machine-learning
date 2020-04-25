@@ -15,51 +15,41 @@ np.random.seed(42)
 class LinearRegression():
 
     def __init__(self):
-        self.weights = None
-        self.bias = 1
+        self.theta = None
 
-    def _loss(self, m, hypothesis, y):
-        return (1 / (2*m)) * sum(np.square(hypothesis - y))
+    def loss(self, X, y):
+        pass
 
     def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
-        X = X[:,np.newaxis]
-        m, features = X.shape
-        
-        # Initialize weights
-        self.weights = np.random.randn(features,1)
-
-        # Gradient Descent
-        for i in range(epochs):
-
-            # Hypothesis Function
-            hypothesis = self.bias + (X @ self.weights)
-
-            # Partial Derivatives of the Cost Function
-            pd_b = (1/m) * sum(hypothesis-y)
-            pd_w = (1/m) * np.dot(X.T, (hypothesis-y))
-
-            # Assigning theta
-            self.bias -=  alpha*pd_b
-            self.weights -= alpha*pd_w
-
-            # Get loss
-            loss = self._loss(m, hypothesis, y)
-
-            # display loss and weights
-            if verbosity:
-                print(f'Epoch: {i}, Weights: {self.bias[0]}, Loss: {loss}')
+        pass
 
     def predict(self, X):
-        return self.bias + (X @ self.weights)
+        '''
+        Also known as the hypothesis, this function takes in 
+        the input matrix `X` and produces an output.
+
+        Parameters
+        ----------
+        X : numpy.ndarray
+            Matrix containing the inputs
+        
+        Returns
+        -------
+        numpy.ndarray
+            Matrix containing the outputs
+        '''
+        return X @ self.theta
 
 def main():
     dataset = load_boston()
     features = dataset.data
     y = dataset.target[:,np.newaxis] 
-    RM = features[:,5] 
+    RM = features[:,5]
+    RM = RM[:,np.newaxis]
+    print(RM.shape)
 
     model = LinearRegression()
-    model.fit(RM, y, epochs=1, verbosity=1)
+    #model.fit(RM, y, alpha=0.02, verbosity=1)
 
 if __name__ == '__main__':
     main()

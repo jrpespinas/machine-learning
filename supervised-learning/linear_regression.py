@@ -17,14 +17,14 @@ class LinearRegression():
     def __init__(self):
         self.theta = None
 
-    def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
+    def fit(self, features, y, alpha=0.001, epochs=1000, verbosity=False):
         '''
         This function uses gradient descent to minimize the error of the loss
         function therefore finding the best line that fits through the dataset.
 
         Parameters
         ----------
-        X : numpy.ndarray
+        features : numpy.ndarray
             2-dimensional matrix containing the inputs
         y : numpy.ndarray
             Nx1 matrix containing the actual values
@@ -35,7 +35,27 @@ class LinearRegression():
         verbosity : bool 
             Display the weights and loss per epoch
         '''
-        
+
+        # Append vector of `ones` before the first column of features
+        m, n = features.shape
+        X = np.ones((m,n+1))
+        X[:,1:] = features
+        print(X)
+
+        # initialize the weights
+        theta = np.random.randn(n+1)
+        self.theta = theta[:,np.newaxis]
+
+        # GRADIENT DESCENT
+        for i in range(epochs):    
+            y_pred = self.predict(X)
+            self.theta = self.theta - alpha * (1/m) * X.T.dot((y_pred - y))
+
+            # Display weights and loss per epoch
+            if verbosity:
+                if i % 100 == 0:
+                    loss = self.loss(X,y) 
+                    print(f'epoch {i}: loss: {loss}, weights: {self.theta}, ')
 
     def predict(self, X):
         '''
@@ -52,7 +72,7 @@ class LinearRegression():
         numpy.ndarray
             Matrix containing the outputs
         '''
-        return X @ self.theta
+        return np.dot(X,self.theta)
 
     def loss(self, X, y):
         '''
@@ -79,10 +99,14 @@ def main():
     y = dataset.target[:,np.newaxis] 
     RM = features[:,5]
     RM = RM[:,np.newaxis]
-    print(RM.shape)
+    DIS = features[:,7] 
+    DIS = DIS[:,np.newaxis]
+    X = np.ones((DIS.shape[0],2))
+    X[:,0:] = RM
+    X[:,1:] = DIS
 
     model = LinearRegression()
-    #model.fit(RM, y, alpha=0.02, verbosity=1)
+    model.fit(RM, y, alpha=0.02, verbosity=1)
 
 if __name__ == '__main__':
     main()

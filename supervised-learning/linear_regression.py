@@ -17,6 +17,43 @@ class LinearRegression():
     def __init__(self):
         self.theta = None
 
+    def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
+        '''
+        This function uses gradient descent to minimize the error of the loss
+        function therefore finding the best line that fits through the dataset.
+
+        Parameters
+        ----------
+        X : numpy.ndarray
+            2-dimensional matrix containing the inputs
+        y : numpy.ndarray
+            Nx1 matrix containing the actual values
+        alpha : float
+            Learning rate
+        epochs : int 
+            Number of iterations
+        verbosity : bool 
+            Display the weights and loss per epoch
+        '''
+        
+
+    def predict(self, X):
+        '''
+        Also known as the hypothesis, this function takes in 
+        the input matrix `X` and produces an output.
+
+        Parameters
+        ----------
+        X : numpy.ndarray
+            2-dimensional matrix containing the inputs
+        
+        Returns
+        -------
+        numpy.ndarray
+            Matrix containing the outputs
+        '''
+        return X @ self.theta
+
     def loss(self, X, y):
         '''
         This function calculates the performance of the model
@@ -33,28 +70,8 @@ class LinearRegression():
         float 
             The loss value
         '''
-        return (1 / (2*m)) * sum(np.square(predict(X)-y))
-        
-
-    def fit(self, X, y, alpha=0.001, epochs=1000, verbosity=False):
-        pass
-
-    def predict(self, X):
-        '''
-        Also known as the hypothesis, this function takes in 
-        the input matrix `X` and produces an output.
-
-        Parameters
-        ----------
-        X : numpy.ndarray
-            M x N matrix containing the inputs
-        
-        Returns
-        -------
-        numpy.ndarray
-            Matrix containing the outputs
-        '''
-        return X @ self.theta
+        m, _ = X.shape
+        return (1 / (2*m)) * sum(np.square(self.predict(X)-y))
 
 def main():
     dataset = load_boston()

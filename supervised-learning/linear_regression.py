@@ -25,7 +25,8 @@ class LinearRegression:
     def loss(self, y, y_hat):
         return np.sum(np.power((y_hat - y), 2)) / (2 * len(y))
 
-    def fit(self, X, y, learning_rate, epochs, verbosity: bool = True):
+    def fit(self, X, y, learning_rate: float = 0.1,
+            epochs: int = 300, verbosity: bool = True):
         self.weights = self.initialize_weights(X)
         num_samples = X.shape[0]
 

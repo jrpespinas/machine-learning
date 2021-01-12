@@ -28,3 +28,6 @@ class LinearRegression:
     def __init__(self):
         self.weights = None
         self.bias = None
+
+    def predict(self):
+        return np.dot(self.weights, X) + self.bias

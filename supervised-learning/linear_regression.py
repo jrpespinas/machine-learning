@@ -16,10 +16,27 @@ class LinearRegression:
         self.bias = 1
 
     def initialize_weights(self, X):
-        self.weights = np.random.randn(X.shape[1], 1)
+        return np.random.randn(X.shape[1], 1)
 
     def predict(self, X):
         return np.dot(self.weights, X) + self.bias
 
     def loss(self, y, y_hat):
         return np.sum(np.power((y_hat - y), 2)) / (2 * len(y))
+
+    def fit(self, X, y, learning_rate, epochs, verbosity: bool = True):
+        self.weights = self.initialize_weights(X)
+
+        for epoch in epochs:
+            y_hat = self.predict(X)
+
+            pd_w = (1 / X.shape[0]) + np.dot(X, (y_hat - y))
+            pd_b = (1 / X.shape[0]) + np.sum(y_hat - y)
+
+            loss = self.loss(y, y_hat)
+
+            self.weights -= learning_rate * pd_w
+            self.bias -= learning_rate * pd_b
+
+            if verbosity:
+                print("Epoch: {}, Loss: {}".format(epoch, loss))

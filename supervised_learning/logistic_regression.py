@@ -9,8 +9,13 @@ __author__ = "Jan Rodolf Espinas"
 
 import numpy as np
 
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
+class LogisticRegression(self):
+    def __init__(self):
+        self.weights = None 
+        self.bias = 0
+
+    def sigmoid(self, z):
+        return 1 / (1 + np.exp(-z))
 
 def main():
     pass

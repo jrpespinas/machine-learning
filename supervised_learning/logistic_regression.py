@@ -14,6 +14,9 @@ class LogisticRegression(self):
         self.weights = None 
         self.bias = 0
 
+    def predict(self, X):
+        return np.dot(self.weights, X) + self.bias
+    
     def sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
 

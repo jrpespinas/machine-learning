@@ -13,6 +13,10 @@ class LogisticRegression(self):
     def __init__(self):
         self.weights = None 
         self.bias = 0
+    
+    def initialize_weights(self, X):
+        num_features = X.shape[1]
+        return np.zeros(num_features)
 
     def predict(self, X):
         return np.dot(self.weights, X) + self.bias

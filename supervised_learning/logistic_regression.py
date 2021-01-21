@@ -24,6 +24,9 @@ class LogisticRegression(self):
     def sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
 
+    def sigmoid_prime(self, z):
+        return self.sigmoid(z) * (1 - self.sigmoid(z))
+
     def loss(self, y, y_hat):
         m = y.shape[1]
         
@@ -34,7 +37,7 @@ class LogisticRegression(self):
         total_loss = np.squeeze(total_loss)
 
         return total_loss
-
+            
 def main():
     pass
 
